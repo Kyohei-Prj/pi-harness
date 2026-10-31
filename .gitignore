@@ -1,0 +1,17 @@
+# --- Secrets: never commit credentials from the agent directory ---
+agent/auth.json
+agent/mcp-auth.json
+
+# --- Runtime state, caches and installs: reproducible, large, machine-specific ---
+agent/sessions/
+agent/install/
+agent/npm/
+agent/bin/
+agent/pi-subagents/
+agent/pi-web-access/
+agent/**/last-seen-version.json
+agent/**/.cache/
+
+# --- OS / editor noise ---
+.DS_Store
+*.swp

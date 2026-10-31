@@ -1,0 +1,62 @@
+{
+  "llama.cpp": {
+    "models": [
+      {
+        "id": "unsloth/Qwen3.8-Flash-Next-GGUF:IQ4_XS",
+        "name": "unsloth/Qwen3.8-Flash-Next-GGUF:IQ4_XS",
+        "api": "openai-completions",
+        "provider": "llama.cpp",
+        "baseUrl": "http://127.0.0.1:8089/v1",
+        "reasoning": true,
+        "thinkingLevelMap": {
+          "off": "off",
+          "minimal": null,
+          "low": null,
+          "medium": "medium",
+          "high": null,
+          "xhigh": null
+        },
+        "input": [
+          "text",
+          "image"
+        ],
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0
+        },
+        "contextWindow": 262144,
+        "maxTokens": 262144,
+        "compat": {
+          "supportsStore": false,
+          "supportsDeveloperRole": false,
+          "supportsReasoningEffort": false,
+          "supportsUsageInStreaming": true,
+          "supportsStrictMode": false,
+          "maxTokensField": "max_tokens",
+          "thinkingFormat": "qwen-chat-template"
+        }
+      },
+      {
+        "type": "classifier",
+        "id": "unsloth/Qwen3.8-Flash-Next-GGUF:IQ4_XS",
+        "name": "unsloth/Qwen3.8-Flash-Next-GGUF:IQ4_XS",
+        "api": "llama-cpp-classify",
+        "provider": "llama.cpp",
+        "baseUrl": "http://127.0.0.1:8089",
+        "input": [
+          "text"
+        ],
+        "cost": {
+          "input": 0,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0
+        },
+        "contextWindow": 262144
+      }
+    ],
+    "checkedAt": 1793423779011
+  }
+}
