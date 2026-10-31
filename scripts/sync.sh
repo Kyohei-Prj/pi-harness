@@ -15,7 +15,7 @@ mirror_dir=$repo_dir/agent
 
 # Relative paths that count as configuration. Missing ones are skipped.
 config_files="settings.json mcp.json models.json models-store.json keybindings.json SYSTEM.md APPEND_SYSTEM.md"
-config_dirs="extensions skills prompts themes"
+config_dirs="agents extensions prompts skills themes"
 
 copy_one() {
 	from=$1
