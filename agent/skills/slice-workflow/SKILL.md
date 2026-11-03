@@ -1,5 +1,13 @@
-# Workflow
-Deliver in slices. Keep state in files, not in conversation memory.
+---
+name: slice-workflow
+description: Slice-by-slice delivery loop that keeps state in files — big picture, smallest next slice, plan, implement, run and observe, record findings. Use only when the user explicitly asks for the full workflow or invokes this skill; deliver small or trivial tasks directly instead.
+disable-model-invocation: true
+---
+
+# Slice workflow
+
+Deliver in slices. Keep state in files, not in conversation memory. Treat any request appended
+below as the idea to deliver.
 
 ## Steps
 1. **Big picture.** Take the idea and write `docs/BIG_PICTURE.md`: goal, expected behavior, and an ordered list of slices. Ask the user only if an ambiguity would change the slice list.

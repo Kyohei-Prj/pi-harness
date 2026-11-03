@@ -10,8 +10,7 @@ no credentials, no installs, no chat history.
 | Path | What it is |
 |---|---|
 | `agent/` | Mirror of the live Pi agent directory — see the table below |
-| `AGENTS.md` | Instructions Pi reads in this repo: code rules, and which tool to reach for |
-| `WORKFLOW.md` | The slice-by-slice loop that the extension, subagent and templates below serve |
+| `AGENTS.md` | Instructions Pi reads in this repo: code rules, when the workflow applies, which tool to reach for |
 | `docs/*_TEMPLATE.md` | Blank state files, copied to start each working file the workflow needs |
 | `scripts/sync.sh` | `pull` / `push` between `agent/` and the live agent directory |
 | `scripts/verify-plan-mode.mts` | Model-free checks for the plan-mode gates |
@@ -27,7 +26,8 @@ no credentials, no installs, no chat history.
 | `agent/extensions/` | User extensions | yes — `plan-mode.ts` |
 | `agent/agents/` | Custom subagent definitions | yes — `explorer.md` |
 | `agent/prompts/` | Prompt templates, each one a `/command` | yes — `explore.md` |
-| `agent/skills/`, `agent/themes/` | Optional user resources | copied recursively once created |
+| `agent/skills/` | Skills, each a directory with a `SKILL.md` | yes — `slice-workflow/` |
+| `agent/themes/` | Optional user resource | copied recursively once created |
 | `agent/auth.json`, `agent/mcp-auth.json` | Saved API keys / OAuth tokens | **never** (gitignored) |
 | `agent/sessions/` | Conversation history | **never** (private, gitignored) |
 | `agent/install/`, `agent/npm/`, `agent/bin/` | Pi release, npm packages, bundled binaries (~265 MB) | **never** (reproducible, gitignored) |
@@ -78,9 +78,9 @@ drive, and `npm:pi-web-access`, which provides `web_search`, `fetch_content`, `s
 
 ## Workflow
 
-`WORKFLOW.md` is the loop — big picture, smallest next slice, plan it, implement, run and observe,
-record findings — and `AGENTS.md` is the ruleset that applies while doing it. State lives in files,
-each started from the matching template in `docs/`:
+The loop — big picture, smallest next slice, plan it, implement, run and observe, record findings —
+is the `slice-workflow` skill, and `AGENTS.md` is the ruleset that applies while doing it. State
+lives in files, each started from the matching template in `docs/`:
 
 | Working file | Template | Holds |
 |---|---|---|
@@ -92,6 +92,21 @@ Only the templates are tracked today; the first slice's filled-in files were rem
 The pieces below are what make steps 2 and 3 work: `/explore` scans the codebase in a read-only child
 so the parent context stays clean, and plan mode keeps the session read-only except for `docs/**.md`,
 so a plan can be saved while code cannot be touched.
+
+### `slice-workflow` — the loop on demand
+
+Most tasks are smaller than the loop, so it no longer runs by default. `agent/skills/slice-workflow/SKILL.md`
+holds the same seven steps and carries `disable-model-invocation: true`, which excludes it from the
+system prompt entirely: Pi cannot reach it on its own, and it costs no tokens until asked for. Invoke
+it as a command, with the idea as the argument:
+
+```text
+/skill:slice-workflow add a fast mode to plan mode
+```
+
+Arguments are appended to the loaded instructions as a user request. Drop the
+`disable-model-invocation` line to let the model route to the skill itself when a task matches its
+`description` — nothing else about the skill has to change.
 
 ## Extensions
 
