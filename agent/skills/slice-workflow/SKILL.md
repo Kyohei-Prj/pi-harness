@@ -16,7 +16,8 @@ below as the idea to deliver.
 4. **Implement** exactly the plan. Leave plan mode first. If the plan is wrong, fix the plan before the code.
 5. **Run and verify.** Run what you built and observe the real behavior against the expected behavior. Use Playwright for web UI; run CLIs, servers, and tests directly. Report what you observed, not what you expect.
 6. **Note findings.** Append to `docs/FINDINGS.md`: surprises, decisions and why, constraints, follow-ups for later slices. Update `docs/BIG_PICTURE.md` if the picture changed.
-7. **Repeat** from step 2 until every slice is done.
+7. **Check context.** Before repeating, check this session's context usage against the maximum context length (`PI_*` environment variables report it). If it exceeds 30%, run `/compact`, then re-read `docs/BIG_PICTURE.md` and `docs/FINDINGS.md` to reload the state.
+8. **Repeat** from step 2 until every slice is done.
 
 ## Definition of done
 A slice is done when its expected behavior is met, as observed in step 5.
